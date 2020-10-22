@@ -1,0 +1,17 @@
+---
+# tasks file for haproxy-test
+
+- name: HAProxy 1st Response
+  uri: url=http://localhost/ return_content=yes
+  register: html_body
+- debug: msg='{{ html_body.content }}'
+
+- name: HAProxy 2nd Response
+  uri: url=http://localhost/ return_content=yes
+  register: html_body
+- debug: msg='{{ html_body.content }}'
+
+- name: HAProxy 3rd Response
+  uri: url=http://localhost/ return_content=yes
+  register: html_body
+- debug: msg='{{ html_body.content }}'

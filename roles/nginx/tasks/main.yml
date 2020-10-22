@@ -1,0 +1,15 @@
+---
+# tasks file for nginx
+
+- name: update apt cache
+  apt: update_cache=yes cache_valid_time=3600
+
+- name: install nginx
+  apt: name=nginx state=present
+
+- name: enable service nginx
+  service: name=nginx enabled=yes
+
+- name: update nginx sites-enable default config
+  template: src={{ role_path }}/files/nginx-default.conf dest=/etc/nginx/sites-available/default 
+  notify: restart nginx

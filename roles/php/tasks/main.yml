@@ -1,0 +1,17 @@
+---
+# tasks file for php
+
+- name: update apt cache
+  apt: update_cache=yes cache_valid_time=3600
+
+- name: install php-fpm
+  apt: name=php7.4-fpm state=present
+
+- name: install php
+  apt: name=php7.4 state=present
+
+- name: enable service php-fpm
+  service: name=php7.4-fpm enabled=yes state=started
+
+- name: add index.php in /var/www/html
+  template: src={{ role_path }}/files/index.php dest=/var/www/html/index.php 

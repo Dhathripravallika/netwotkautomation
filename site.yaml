@@ -1,0 +1,22 @@
+---
+- hosts: all
+  gather_facts: yes
+
+- name: haproxy
+  hosts: devhaproxy
+  become: yes
+  become_method: sudo
+  roles:
+    - haproxy
+
+- name: nginx
+  hosts: webservers
+  become: yes
+  roles:
+    - nginx
+    - php
+
+- name: haproxy-test
+  hosts: devhaproxy
+  roles:
+    - haproxy-test
